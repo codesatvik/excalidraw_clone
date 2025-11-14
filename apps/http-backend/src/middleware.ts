@@ -1,20 +1,32 @@
 import { NextFunction, Request, Response } from "express";
-import { JWTSECRET } from "@repo/backend-common/config";
+import { JWTSECRET } from "@repo/backend-common";
 import jwt from "jsonwebtoken";
 
 
 
 export function middleware(req: Request, res: Response, next: NextFunction) {
-    const token = req.headers["authorization"] ?? ""; 
-    const decoded = jwt.verify(token, JWTSECRET);
+    try {
+        const token = req.headers["authorization"]?.replace("Bearer ", "") ?? "";
+        
+        if (!token) {
+            res.status(401).json({
+                message: "Missing authorization token"
+            });
+            return;
+        }
 
-    if (decoded) {
-       // @ts-ignore
-        req.userId = decoded.userId;
-        next();
-    } else {
-        res.status(403).json({
-            messagae:"Unauthorized"
-        })
+        const decoded = jwt.verify(token, JWTSECRET);
+        if (decoded && typeof decoded === "object" && "userId" in decoded) {
+            (req as any).userId = decoded.userId;
+            next();
+        } else {
+            res.status(401).json({
+                message: "Invalid token"
+            });
+        }
+    } catch (error) {
+        res.status(401).json({
+            message: "Unauthorized"
+        });
     }
 }

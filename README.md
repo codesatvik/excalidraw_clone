@@ -1,4 +1,4 @@
-# Turborepo starter
+# Excalidraw Turborepo
 
 This Turborepo starter is maintained by the Turborepo core team.
 

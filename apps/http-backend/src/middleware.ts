@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 export function middleware(req: Request, res: Response, next: NextFunction) {
     try {
         const token = req.headers["authorization"]?.replace("Bearer ", "") ?? "";
-        
+
         if (!token) {
             res.status(401).json({
                 message: "Missing authorization token"

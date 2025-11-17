@@ -1,5 +1,3 @@
-if (!process.env.JWTSECRET) {
-    throw new Error("JWTSECRET environment variable is not set");
-}
+import "dotenv/config";
 
-export const JWTSECRET = process.env.JWTSECRET;
+export const JWTSECRET = process.env.JWTSECRET || "12344321";

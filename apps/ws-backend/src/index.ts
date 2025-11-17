@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { WebSocketServer } from "ws"
 import { JWTSECRET } from "@repo/backend-common"
 import jwt, { JwtPayload } from "jsonwebtoken";
@@ -14,7 +15,7 @@ wss.on("connection", function connection(ws, request) {
 
         const queryParams = new URLSearchParams(url.split('?')[1]);
         const token = queryParams.get('token') || "";
-        
+
         if (!token) {
             ws.close(1008, "Missing authorization token");
             return;

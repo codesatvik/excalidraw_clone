@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 import { JWTSECRET } from "@repo/backend-common";
 import { middleware } from "./middleware";
 import { CreateUserSchema, SigninSchema, CreateRoomSchema } from "@repo/common1/types"
-import { prismaClient } from "@repo/db/client"
+import { prismaClient } from "@repo/db";
 const app = express();
 app.use(express.json())
 

@@ -30,13 +30,11 @@ app.post("/signup", async (req, res) => {
         });
     } catch (err) {
         const anyErr = err as any;
-        // Handle Prisma unique constraint error (P2002)
-        if (anyErr?.code === 'P2002') {
+         if (anyErr?.code === 'P2002') {
             res.status(409).json({ message: 'User already exists with this username' });
             return;
         }
 
-        // Prisma client initialization/connectivity error
         if (anyErr?.name === 'PrismaClientInitializationError') {
             console.error('Prisma initialization error:', anyErr);
             res.status(503).json({ message: 'Database unavailable' });
@@ -104,6 +102,32 @@ app.post("/room", middleware, async (req, res) => {
         })
     }
 })
+app.get("/chats/:roomId", async (req, res) => {
+    const roomId = Number(req.params.roomId);
+    const messages = await prismaClient.chat.findMany({
+        where: {
+            roomId: roomId
+        },
+        orderBy: {
+            id: "desc"
+        },
+        take: 50
+    });
+    res.json({
+        messages
+    })
+})
+app.get("/chats/:slug", async (req, res) => {
+    const slug = req.params.slug;
+    const room = await prismaClient.room.findFirst({
+        where: {
+            slug
+        },
+    });
+    res.json({
+        room
+    })
+  })
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

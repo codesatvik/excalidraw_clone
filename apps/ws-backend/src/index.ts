@@ -1,13 +1,13 @@
-import { WebSocketServer , WebSocket } from "ws"
+import { WebSocketServer, WebSocket } from "ws"
 import { JWTSECRET } from "@repo/backend-common"
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { prismaClient } from "@repo/db"
 const wss = new WebSocketServer({ port: 8080 });
 
 interface User {
-    ws: WebSocket,
-    rooms: String[],
-    userId: String
+  ws: WebSocket,
+  rooms: String[],
+  userId: String
 }
 
 const users: User[] = [];
@@ -25,7 +25,7 @@ function checkUser(token: string): string | null {
     }
 
     return decoded.userId;
-  } catch(e) {
+  } catch (e) {
     return null;
   }
 }
@@ -33,7 +33,7 @@ function checkUser(token: string): string | null {
 wss.on("connection", function connection(ws, request) {
 
   try {
- 
+
     const url = request.url;
     if (!url) {
       ws.close(1008, "Missing token");
@@ -66,7 +66,7 @@ wss.on("connection", function connection(ws, request) {
         const user = users.find(x => x.ws === ws);
         user?.rooms.push(parsedData.roomId);
       }
-    
+
       if (parsedData.type === "leave_room") {
         const user = users.find(x => x.ws === ws);
         if (!user) {

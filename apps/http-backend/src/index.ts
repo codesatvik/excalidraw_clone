@@ -30,7 +30,7 @@ app.post("/signup", async (req, res) => {
         });
     } catch (err) {
         const anyErr = err as any;
-         if (anyErr?.code === 'P2002') {
+        if (anyErr?.code === 'P2002') {
             res.status(409).json({ message: 'User already exists with this username' });
             return;
         }
@@ -85,7 +85,7 @@ app.post("/room", middleware, async (req, res) => {
     // @ts-ignore
     const userId = req.userId;
     try {
-   
+
         const room = await prismaClient.room.create({
             data: {
                 slug: parsedData.data.name,
@@ -114,7 +114,7 @@ app.get("/chats/:roomId", async (req, res) => {
         take: 50
     });
     res.json({
-        
+
         messages
     })
 })
@@ -128,7 +128,7 @@ app.get("/chats/:slug", async (req, res) => {
     res.json({
         room
     })
-  })
+})
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

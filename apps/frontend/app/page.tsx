@@ -50,9 +50,9 @@ export default function LandingPage() {
             
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8 font-medium text-slate-600">
-              <Link href="#features" className="hover:text-orange-600 transition">Features</Link>
-              <Link href="#showcase" className="hover:text-orange-600 transition">Showcase</Link>
-              <Link href="https://github.com" className="hover:text-orange-600 transition">GitHub</Link>
+              <Link href={"/signin"} className="hover:text-orange-600 transition">Sign in</Link>
+              <Link href={"/signup"} className="hover:text-orange-600 transition">Sign up</Link>
+              <Link href="https://github.com/codesatvik" className="hover:text-orange-600 transition">GitHub</Link>
               <button className="group relative">
                 <div className="absolute -inset-0.5 bg-slate-800 rounded-lg blur opacity-20 group-hover:opacity-40 transition"></div>
                 <div className="relative flex items-center px-6 py-2 bg-white border-2 border-slate-800 rounded-lg font-hand text-lg hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(30,41,59,0.2)]">
@@ -73,8 +73,8 @@ export default function LandingPage() {
         {/* CSS-Based Mobile Dropdown Toggle */}
         <input type="checkbox" id="mobile-menu-toggle" className="peer hidden" />
         <div className="hidden peer-checked:flex flex-col bg-white border-b border-slate-200 p-4 gap-4 shadow-lg absolute w-full md:hidden">
-            <Link href="#features" className="block py-2 text-slate-600 font-medium">Features</Link>
-            <Link href="https://github.com" className="block py-2 text-slate-600 font-medium">GitHub</Link>
+           <Link href={"/signin"} className="block py-2 text-slate-600 font-medium">Sing in</Link>
+            <Link href={"/signup"} className="block py-2 text-slate-600 font-medium">Sign up</Link>
             <button className="w-full text-center py-3 bg-slate-900 text-white rounded-lg font-bold">Start Drawing</button>
         </div>
       </nav>
@@ -105,11 +105,12 @@ export default function LandingPage() {
               Launch App
               <Pencil className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform" />
             </button>
-            
+           <a href="https://github.com/codesatvik/excalidraw_clone">
             <button className="inline-flex items-center justify-center px-8 py-3.5 text-lg font-medium text-slate-700 transition-all duration-200 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 shadow-sm hover:shadow-md">
               <Github className="w-5 h-5 mr-2" />
               Star on GitHub
-            </button>
+              </button>
+            </a>
           </div>
 
           {/* Browser Mockup */}
@@ -239,7 +240,7 @@ export default function LandingPage() {
             <Link href="#" className="hover:text-orange-600 transition">Privacy</Link>
             <Link href="#" className="hover:text-orange-600 transition">Terms</Link>
             <Link href="#" className="hover:text-orange-600 transition">Twitter</Link>
-            <Link href="#" className="hover:text-orange-600 transition">GitHub</Link>
+            <Link href="https://github.com/codesatvik" className="hover:text-orange-600 transition">GitHub</Link>
           </div>
         </div>
       </footer>

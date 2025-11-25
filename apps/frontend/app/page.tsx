@@ -86,8 +86,8 @@ export default function LandingPage() {
           {/* The "Anti-Neon" Blob */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-orange-100/80 to-rose-100/80 opacity-60 blur-3xl rounded-full -z-10 pointer-events-none" />
 
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
-            Virtual whiteboards,<br />
+          <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 mb-6">
+            Virtual whiteboards,<br /> 
             <span className="font-hand text-orange-600 relative inline-block mt-2 px-2">
               hand-drawn style.
               <svg className="absolute w-full h-3 -bottom-1 left-0 text-orange-200 opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">

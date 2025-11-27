@@ -9,7 +9,7 @@ type Shape = {
     height: number;
 } | {
     type: "circle";
-    conterX: number;
+    centerX: number;
     centerY: number;
     radius: number;
 }
@@ -47,13 +47,32 @@ export async function initDraw(canvas: HTMLCanvasElement, roomId: string, socket
         clicked = false;
         const width = e.clientX - startX;
         const height = e.clientY - startY;
-        const shape:Shape = {
-            type: "rect",
-            x: startX,
-            y: startY,
-            height,
-            width
+        // @ts-ignore
+        const selectedTool = window.selectedTool;
+        let shape: Shape | null = null;
+        if (selectedTool === "rect") {
+            shape = {
+                type: "rect",
+                x: startX,
+                y: startY,
+                height,
+                width
+            }
+        } else if (selectedTool === "circle") {
+            const radius = Math.max(width, height) / 2;
+            shape = {
+                type: "circle",
+                radius: radius,
+                centerX: startX + radius,
+                centerY: startY + radius
+            }
         }
+        if (!shape) {
+            return;
+        }
+
+            
+        
         existingShape.push(shape);
         socket.send(JSON.stringify({
             type: "chat",
@@ -70,7 +89,21 @@ export async function initDraw(canvas: HTMLCanvasElement, roomId: string, socket
             const height = e.clientY - startY;
             clearCanvas(existingShape, canvas, ctx);
             ctx.strokeStyle = "rgba(255,255,255)";
-            ctx.strokeRect(startX, startY, width, height);
+           // @ts-ignore
+            const  selectedTool = window.selectedTool;
+            if (selectedTool === "rect") {
+              ctx.strokeRect(startX, startY, width, height);
+
+            } else if (selectedTool === "circle") {
+                const radius = Math.max(width, height) / 2;
+
+                const centerX = startX + radius;
+                const centerY = startY + radius;
+                ctx.beginPath()
+                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2)
+                ctx.stroke()
+                ctx.closePath()
+            }
            // console.log(startX,startY,width,height,e.clientX,e.clientY)
         }
     })

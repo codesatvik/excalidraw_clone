@@ -12,6 +12,12 @@ type Shape = {
     centerX: number;
     centerY: number;
     radius: number;
+} | {
+    type: "pencil";
+    startX: number;
+    startY: number;
+    endX: number;
+    endY: number;
 }
 
 
@@ -119,11 +125,17 @@ function clearCanvas(existingShape: Shape[], canvas: HTMLCanvasElement, ctx: Can
             ctx.strokeStyle = "rgba(255,255,255)";
             ctx.strokeRect(shape.x, shape.y, shape.width, shape.height);
            // console.log(`this is ${shape.x}, ${shape.y}, ${shape.width}, ${shape.height}`)
+        } else if(shape.type === "circle" ){
+            if (shape.type === "circle") {
+                ctx.beginPath();
+                ctx.arc(shape.centerX, shape.centerY, shape.radius, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.closePath();
+           }
         }
     })
     
 } 
-
 async function getExistingShapes(roomId: string) {
     const res = await axios.get(`${HTTP_BACKEND}/chats/${roomId}`);
     const messages = res.data.messages;
@@ -134,3 +146,4 @@ async function getExistingShapes(roomId: string) {
     })
     return shapes
 }
+

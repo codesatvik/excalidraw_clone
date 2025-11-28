@@ -46,9 +46,9 @@ export class Game {
     }
 
     destroy() {
-        this.canvas.removeEventListener("mousedown", this.mouseDownHandler.bind(this))
-        this.canvas.removeEventListener("mouseup", this.mouseUpHandler.bind(this))
-        this.canvas.removeEventListener("mousemove", this.mouseMoveHandlers.bind(this))
+        this.canvas.removeEventListener("mousedown", this.mouseDownHandler)
+        this.canvas.removeEventListener("mouseup", this.mouseUpHandler)
+        this.canvas.removeEventListener("mousemove", this.mouseMoveHandlers)
     }
     setTool(tool: "circle" | "pencil" | "rect") {
         this.selectedTool = tool;
@@ -94,12 +94,12 @@ export class Game {
             }
         })
     }
-    mouseDownHandler = (e) => {
+    mouseDownHandler = (e:any) => {
         this.clicked = true
         this.startX = e.clientX
         this.startY = e.clientY
     }
-    mouseUpHandler = (e) => {
+    mouseUpHandler = (e:any) => {
         this.clicked = false;
         const width = e.clientX - this.startX;
         const height = e.clientY - this.startY;
@@ -140,7 +140,7 @@ export class Game {
 
     }
 
-    mouseMoveHandlers= (e) => {
+    mouseMoveHandlers= (e:any) => {
         if (this.clicked) {
             const width = e.clientX - this.startX;
             const height = e.clientY - this.startY;

@@ -5,11 +5,16 @@ import { JWTSECRET } from "@repo/backend-common";
 import { middleware } from "./middleware";
 import { CreateUserSchema, SigninSchema, CreateRoomSchema } from "@repo/common1/types"
 import { prismaClient } from "@repo/db";
+import cookieParser  from "cookie-parser";
 import cors from "cors";
-
 const app = express();
+
+app.use(cookieParser())
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    credentials: true, 
+    origin: "http://localhost:3000"
+}));
 
 app.post("/signup", async (req, res) => {
     const parsedData = CreateUserSchema.safeParse(req.body);
@@ -71,8 +76,13 @@ app.post("/signin", async (req, res) => {
         return
     }
     const token = jwt.sign({ userId: user.id }, JWTSECRET);
+    res.cookie("token", token, {
+        httpOnly: true,
+        maxAge:24 * 60 * 60 * 14000
+    })
     res.status(200).json({
-        token
+        token,
+        "message":"Logged in successfully"
     });
 })
 
@@ -117,7 +127,6 @@ app.get("/chats/:roomId", async (req, res) => {
         take: 700
     });
     res.json({
-
         messages
     })
 })

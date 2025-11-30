@@ -31,13 +31,13 @@ export async function handleAuthAction(prevState: any, formData: FormData) {
     cookieStore.set("token", data.token, {
         httpOnly: true, 
         secure: process.env.NODE_ENV === "production",
-        maxAge: 60 * 60 * 24 * 7, 
+        maxAge: 60 * 60 * 24 * 14, 
         path: "/",
     });
 
   } catch (error) {
-    return { message: "Network error or server is down" };
+    return { message: "Network error or server is down" , error };
   }
 
-  redirect("/room");
+  redirect(isSignin ?  "/room" :"/signin");
 }

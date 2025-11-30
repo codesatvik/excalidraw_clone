@@ -1,8 +1,10 @@
+"use client"
 import { HTTP_BACKEND } from "@/config";
 import axios from "axios";
 
 export async function getExistingShapes(roomId: string) {
     const res = await axios.get(`${HTTP_BACKEND}/chats/${roomId}`);
+    console.log(res)
     const messages = res.data.messages;
 
     const shapes = messages.map((x: { message: string }) => {
@@ -10,4 +12,4 @@ export async function getExistingShapes(roomId: string) {
         return messageData.shape;
     })
     return shapes
-}
+} 

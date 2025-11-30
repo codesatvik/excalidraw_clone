@@ -101,10 +101,12 @@ export default function LandingPage() {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4 px-4">
-            <button className="group inline-flex items-center justify-center px-8 py-3.5 text-lg font-bold text-white transition-all duration-200 bg-slate-900 rounded-xl hover:bg-slate-800 shadow-xl hover:shadow-2xl hover:-translate-y-1 focus:ring-2 focus:ring-offset-2 focus:ring-slate-900">
-              Launch App
-              <Pencil className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform" />
-            </button>
+            <Link href="/signup">
+             <button className="group inline-flex items-center justify-center px-8 py-3.5 text-lg font-bold text-white transition-all duration-200 bg-slate-900 rounded-xl hover:bg-slate-800 shadow-xl hover:shadow-2xl hover:-translate-y-1 focus:ring-2 focus:ring-offset-2 focus:ring-slate-900">
+                Launch App
+               <Pencil className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform" />
+              </button>
+            </Link>
            <a href="https://github.com/codesatvik/excalidraw_clone">
             <button className="inline-flex items-center justify-center px-8 py-3.5 text-lg font-medium text-slate-700 transition-all duration-200 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 shadow-sm hover:shadow-md">
               <Github className="w-5 h-5 mr-2" />
